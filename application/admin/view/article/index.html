@@ -1,0 +1,53 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <a href="{:url('create')}" class="layui-btn layui-btn-small">新增文章</a>
+    
+  </div>
+</fieldset>
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>作者</td>
+                <td>标题</td>
+                <td>阅读数</td>
+                <td>是否发布</td>
+                <td>创建时间</td>
+                <td>操作</td>
+              </tr>
+            </thead>
+            <tbody>
+              {volist name="lists" id="list"}
+              <tr>
+                <td>{$list->id}</td>
+                <td>{$list->author}</td>
+                <td>{$list->title}</td>
+                <td>{$list->views}</td>
+                <td>{$list->disabled_text}</td>
+                <td>{$list->created_at}</td>
+                <td>
+                  <a href="{:url('edit',['id'=>$list->id])}" class="layui-btn layui-btn-normal layui-btn-small" title="编辑"><i class="layui-icon">&#xe642;</i></a>
+                  <a href="javascript:;" class="layui-btn layui-btn-normal layui-btn-small ajax-del" data-id="{$list->id}" data-url="{:url('destory')}" title="删除"><i class="layui-icon">&#xe640;</i></a></td>
+              </tr>
+              {/volist}
+            </tbody>
+          </table>
+
+          <div id="page"></div>
+        </div>
+      </div>
+    </div> 
+  <!-content end--->
+
+ 
+  {/block}

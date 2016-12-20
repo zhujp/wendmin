@@ -1,0 +1,46 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('authUser')}" method="post">
+            <input type="hidden" name="group_id" value="{$group_id}" />
+            <div class="layui-form-item">
+              <label class="layui-form-label">管理员</label>
+              <div class="layui-input-block">
+                {volist name="managers" id="manager"}
+                <input type="checkbox" name="managers[{$manager->id}]" value="{$manager->id}" title="{$manager->username}" {notempty name="authManagers"}{in name="manager->id" value="$authManagers"}checked{/in}{/notempty}>
+                {/volist}
+                
+              </div>
+            </div>
+
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div>
+    
+    
+  <!-content end--->
+  
+{/block}

@@ -1,0 +1,84 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>编辑文章</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('save')}" method="post">
+            <input type="hidden" name="id" value="{$article->id}">
+            <div class="layui-form-item">
+              <label class="layui-form-label">作者</label>
+              <div class="layui-input-inline">
+                <input type="text" name="author" value="{$article->author}" lay-verify="author" autocomplete="off" placeholder="请输入作者" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">标题</label>
+              <div class="layui-input-inline">
+                <input type="text" name="title" value="{$article->title}" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-block">
+              <textarea placeholder="请输入简介" name="intro" class="layui-textarea">{$article->intro} </textarea>
+            </div>
+          </div>
+
+          <!-- <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">内容</label>
+          <div class="layui-input-block">
+            <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="w_editor"></textarea>
+          </div>
+        </div> -->
+         <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">编辑器</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea layui-hide" name="body" lay-verify="body" id="w_editor">{$article->body} </textarea>
+    </div>
+  </div>
+
+            
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否发布</label>
+                <div class="layui-input-block">
+                  <input type="checkbox" {eq name="$article->disabled" value="0"}checked=""{/eq} name="disabled" value="0" lay-skin="switch" lay-filter="switchTest" title="发布">
+                </div>
+              </div>
+      
+              <div class="layui-inline">
+            <label class="layui-form-label">发布时间</label>
+            <div class="layui-input-block">
+              <input type="text" name="created_at" id="date" lay-verify="date" placeholder="2016-12-21" value="{$article->created_at}" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+            </div>
+          </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div> 
+  <!-content end--->
+
+  
+    {/block}

@@ -1,0 +1,64 @@
+{extend name="layout/layout" /}
+{block name="header"}
+    <!-header start--->
+  <div class="header">
+    <a href="javascript:;" class="logo"  style="font-size: 1.8rem;color: #218886;">Wendmin</a>
+    <ul class="layui-nav layui-inline">
+        
+        <li class="layui-nav-item">
+          <a href="javascript:;">欢迎您，{:session('username')}</a>
+          <dl class="layui-nav-child">
+            <dd><a href="{:url('manager/setting')}">个人设置</a></dd>
+            <dd><a href="{:url('login/logout')}">退出</a></dd>
+          </dl>
+        </li>
+      </ul>
+  </div>
+  <!-header end--->
+{/block}
+{block name="side"}
+    <!-side start--->
+  <div class="layui-side" style="position: static;">
+  <div class="layui-side-scroll">
+    <ul class="layui-nav layui-nav-tree" style="padding-bottom: 300px;">
+  {volist name="sideMenu" id="side"}
+  {empty name="side.child"}
+  <li class="layui-nav-item"><a href="{:url($side.url)}">{$side.name}</a></li>
+  {else /}
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">{$side.name}</a>
+    <dl class="layui-nav-child">
+      {volist name="side.child" id="child"}
+      <dd><a href="{:url($child.url)}">{$child.name}</a></dd>
+      {/volist}
+    </dl>
+  </li>
+  {/empty}
+  {/volist}
+  
+  
+</ul>
+</div>
+  </div>
+  <!-side end--->
+{/block}
+{block name="footer"}
+<div class="layui-footer footer footer-doc">
+  <div class="layui-main">
+    <p>2016 © <a href="/">wendiy.com</a></p>
+    
+  </div>
+</div>
+<style type="text/css">
+  .footer {
+        padding: 10px 0;
+    line-height: 20px;
+    text-align: center;
+    background-color: #eee;
+    color: #666;
+    font-weight: 300;
+    float: left;
+    width: 100%;
+  }
+</style>  
+{/block}     

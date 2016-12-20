@@ -1,0 +1,82 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>编辑菜单</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('save')}" method="post">
+              
+            <input name="id" type="hidden" value="{$item.id}"/>
+            <div class="layui-form-item">
+              <label class="layui-form-label">所属菜单</label>
+              <div class="layui-input-inline">
+                <select name="parent_id">
+                  <option value="0">请选择所属菜单</option>
+                  {notempty name="menus"}
+                  {volist name="menus" id="menu"}
+                  <option value="{$menu.id}" {if condition="$menu['id'] eq $item['parent_id']"}selected{/if}>{$menu.name}</option>
+                  {notempty name="menu['child']"}
+                    {volist name="menu['child']" id="child"}
+                    <option value="{$child.id}" {if condition="$child['id'] eq $item['parent_id']"}selected{/if}>&nbsp;&nbsp;&nbsp;{$child.name}</option>
+                    {/volist}
+                  {/notempty}
+                  {/volist}
+                  {/notempty}          
+                </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">菜单名称</label>
+              <div class="layui-input-inline">
+                <input type="text" name="name" lay-verify="name" value="{$item.name}" autocomplete="off" placeholder="请输入名称" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">Url</label>
+              <div class="layui-input-inline">
+                <input type="text" name="url"  value="{$item.url}" lay-verify="" autocomplete="off" placeholder="请输入url" class="layui-input">
+              </div>
+            </div>
+
+          
+            <div class="layui-form-item">
+              <div class="layui-inline">
+                <label class="layui-form-label">排序</label>
+                <div class="layui-input-inline">
+                  <input type="number" name="sort" value="{$item.sort}" lay-verify="number" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">是否启用</label>
+                <div class="layui-input-block">
+                  <input type="checkbox" {empty name="item['disabled']"}checked=""{/empty} name="disabled" value="0" lay-skin="switch" lay-filter="switchTest" title="启用">
+                </div>
+              </div>
+
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div> 
+  <!-content end--->
+
+    {/block}

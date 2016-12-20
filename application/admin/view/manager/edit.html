@@ -1,0 +1,70 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('save')}" method="post">
+            
+            
+            <div class="layui-form-item">
+              <label class="layui-form-label">管理员名称</label>
+              <div class="layui-input-inline">
+                <input type="text" name="username" veri lay-verify="username" autocomplete="off" value="{$manager.username}" placeholder="请输入名称" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">手机</label>
+              <div class="layui-input-inline">
+                <input type="tel" name="mobile"  value="{$manager.mobile}" lay-verify="phone" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-inline">
+              <input type="text" name="email"  value="{$manager.email}" lay-verify="email" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+
+           <div class="layui-form-item">
+              <label class="layui-form-label">密码</label>
+              <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
+              </div>
+            </div> 
+          <div class="layui-form-item">
+            <label class="layui-form-label">是否启用</label>
+            <div class="layui-input-block">
+              <input type="checkbox" {eq name="manager['disabled']" value="0"}checked=""{/eq} name="disabled" value="0" lay-skin="switch" lay-filter="switchTest" title="启用">
+            </div>
+          </div>
+
+          <input type="hidden" name="id" value="{$manager.id}">
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+               <!-- <a href="javascript:;" class="layui-btn layui-btn-normal" id="sub">保存</a> -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div>
+    
+    
+  
+
+{/block}

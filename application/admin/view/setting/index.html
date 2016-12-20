@@ -1,0 +1,65 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>系统设置</legend>
+  <div>
+    
+    <!-- <a href="{:url('create')}" class="layui-btn layui-btn-small">新增设置</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('save')}" enctype="multipart/form-data" method="post">
+            
+            {volist name="sets" id="set"}
+            <div class="layui-form-item">
+            <label class="layui-form-label">{$set.title}</label>
+              <div class="layui-input-block">
+                {switch name="$set.type"}
+                {case value="text"}
+                <input type="text" name="{$set.name}" lay-verify="" autocomplete="off" placeholder="" value="{$set.value}" class="layui-input">{/case}
+                {case value="textarea"}
+                <textarea placeholder="" name="{$set.name}" class="layui-textarea">{$set.value}</textarea>{/case}
+                {case value="img"}
+                <div class="site-demo-upload">
+                  {empty name="$set['value']"}
+                  <img id="img" src="http://z.wendiy.com/uploads/default.jpg">
+                  {else /}
+                  <img id="img" src="{$set->value}">
+                  {/empty}
+                  <input type="hidden" name="logo" value="{$set->value}" />
+                  <div class="site-demo-upbar">
+                    <input type="file" name="img" class="layui-upload-file" id="w_img">
+
+                  </div>
+                </div>{/case}
+                {/switch}
+              </div>
+            </div>
+            {/volist}
+
+            
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div> 
+  <!-content end--->
+
+ 
+    {/block}

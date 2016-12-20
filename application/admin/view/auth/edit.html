@@ -1,0 +1,58 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('save')}" method="post">
+            <input type="hidden" name="id" value="{$group->id}">
+            
+            <div class="layui-form-item">
+              <label class="layui-form-label">组名</label>
+              <div class="layui-input-inline">
+                <input type="text" name="group_name" value="{$group->group_name}" lay-verify="group_name" autocomplete="off" placeholder="请输入组名" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">简介</label>
+            <div class="layui-input-block">
+              <textarea placeholder="请输入简介" name="intro" class="layui-textarea">{$group->intro}</textarea>
+            </div>
+          </div>
+            
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">是否启用</label>
+            <div class="layui-input-block">
+              <input type="checkbox" {eq name="group.disabled" value="0"}checked=""{/eq} name="disabled" value="0" lay-skin="switch" lay-filter="switchTest" title="启用">
+            </div>
+          </div>
+
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div>
+    
+    
+  <!-content end--->
+  
+{/block}

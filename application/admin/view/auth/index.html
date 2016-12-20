@@ -1,0 +1,55 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <a href="{:url('create')}" class="layui-btn layui-btn-small">新增权限组</a>
+    
+  </div>
+</fieldset>
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>组名</td>
+                <td>简介</td>
+                <td>是否启用</td>
+                <td>授权操作</td>
+                <td>操作</td>
+              </tr>
+            </thead>
+            <tbody>
+              {volist name="lists" id="list"}
+              <tr>
+                <td>{$list->id}</td>
+                <td>{$list->group_name}</td>
+                <td>{$list->intro}</td>
+                <td>{$list->disabled_text}</td>
+                <td>
+                  <a href="{:url('access',['id'=>$list->id])}" class="layui-btn layui-btn-normal layui-btn-small" title="访问授权">访问授权</a>
+                  <a href="{:url('user',['id'=>$list->id])}" class="layui-btn layui-btn-normal layui-btn-small" title="用户授权">用户授权</a>
+                </td>
+                
+                <td>
+                  <a href="{:url('edit',['id'=>$list->id])}" class="layui-btn layui-btn-normal layui-btn-small" title="编辑"><i class="layui-icon">&#xe642;</i></a>
+                  <a href="javascript:;" class="layui-btn layui-btn-normal layui-btn-small ajax-del" data-id="{$list->id}" data-url="{:url('destory')}" title="删除"><i class="layui-icon">&#xe640;</i></a></td>
+              </tr>
+              {/volist}
+            </tbody>
+          </table>
+
+          <div id="page"></div>
+        </div>
+      </div>
+    </div> 
+  <!-content end--->
+
+ 
+  {/block}

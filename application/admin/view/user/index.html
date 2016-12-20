@@ -1,0 +1,60 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <a href="{:url('create')}" class="layui-btn layui-btn-small">新增用户</a>
+    
+  </div>
+</fieldset>
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>用户名</td>
+                <td>手机号</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>邮箱</td>
+                <td>注册时间</td>
+                <td>最后登录</td>
+                <td>ip</td>
+                <td>操作</td>
+              </tr>
+            </thead>
+            <tbody id="content">
+              {volist name="lists" id="list"}
+              <tr>
+              <td>{$list->id}</td>
+              <td>{$list->username}</td>
+              <td>{$list->mobile}</td>
+              <td>{$list->sex_text}</td>
+              <td>{$list->age}</td>
+              <td>{$list->email}</td>
+              <td>{$list->created_at}</td>
+              <td>{$list->last_login}</td>
+              <td>{$list->ip}</td>
+              <td>
+                <a href="{:url('edit',['id'=>$list->id])}" class="layui-btn layui-btn-normal layui-btn-small" title="编辑"><i class="layui-icon">&#xe642;</i></a>
+                <a href="javascript:;" class="layui-btn layui-btn-normal layui-btn-small ajax-del" data-id="{$list->id}" data-url="{:url('destory')}" title="删除"><i class="layui-icon">&#xe640;</i></a>
+              </td>
+              </tr>
+              {/volist}
+            </tbody>
+          </table>
+
+          <div id="page"></div>
+          {$lists->render()}
+        </div>
+      </div>
+    </div> 
+  <!-content end--->
+
+  {/block}

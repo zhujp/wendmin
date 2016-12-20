@@ -1,0 +1,86 @@
+{extend name="layout/layout" /}
+{block name="body"}
+<blockquote class="layui-elem-quote layui-quote-nm" style="text-align: center;margin-top: 100px;width: 30%;margin-left:34%;">
+<fieldset class="layui-elem-field layui-field-title">
+  <legend>Wendiy</legend>
+  </fieldset>
+  <form class="layui-form" action="">
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-inline">
+      <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" >
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-inline">
+      <button class="layui-btn" lay-submit="" lay-filter="sub" style="width:190px;margin-left: 110px;">登录</button>
+    </div>
+  </div>
+  </form>
+  </blockquote>
+   
+
+</div>
+<div class="layui-footer footer footer-doc" style="position: static;">
+  <div class="layui-main">
+    <p>2016 © <a href="/">wendiy.com</a></p>
+    
+  </div>
+</div>
+<style type="text/css">
+  .footer {
+        padding: 30px 0;
+    line-height: 30px;
+    text-align: center;
+    background-color: #eee;
+    color: #666;
+    font-weight: 300;
+  }
+</style>           
+<script>
+layui.use(['element','form'], function(){
+  var element = layui.element(); 
+  var form = layui.form();
+  //自定义验证规则
+  form.verify({
+    name: function(value){
+      if(value.length < 1){
+        return '请输入用户名';
+      }
+    }
+    ,password: function(value){
+      if(value.length < 1){
+        return '请输入密码';
+      }
+    }
+  });
+  
+  
+  
+  //监听提交
+  form.on('submit(sub)', function(data){
+    var url = "{:url('login')}";
+    $.post(url,{data:JSON.stringify(data.field)},function(result){
+      if (result.code == 1) {
+        layer.msg(result.msg,{icon: 6});
+        setInterval(function(){
+          window.location.href=result.url;
+        },result.wait*1000);
+        return false;
+      }
+      layer.msg(result.msg,{icon: 5});
+    });
+    return false;
+   
+  });
+  
+});
+</script>
+
+{/block}

@@ -1,0 +1,65 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>{$title}</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('saveAccess')}" method="post">
+            <input type="hidden" name="group_id" value="{$group_id}" />
+
+            {volist name="access" id="rule"}
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <input type="checkbox" name="rule[{$rule.id}]" value="{$rule.rule_id}" title="{$rule.name}" {notempty name="rule['checked']"}checked{/notempty} >
+                {notempty name="rule['child']"}
+                {volist name="rule['child']" id="childs"}
+                <div class="layui-form-item">
+                   
+                    <div class="layui-input-block" style="margin-left: 50px;"><input type="checkbox" name="rule[{$childs.id}]" value="{$childs.rule_id}" title="{$childs.name}" {notempty name="childs['checked']"}checked{/notempty}></div>
+                      {notempty name="childs['child']"}
+                      
+                      <div class="layui-form-item">
+                    <div class="layui-input-block" style="margin-left: 80px;">
+                    {volist name="childs['child']" id="child"}
+                      <input type="checkbox" name="rule[{$child.id}]" value="{$child.rule_id}" title="{$child.name}" {notempty name="child['checked']"}checked{/notempty}>
+                      {/volist}
+                    </div>
+                      
+                    </div>
+                    {/notempty}
+                  </div>
+                {/volist}
+                {/notempty}
+              </div>
+            </div>
+
+            {/volist}
+
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div>
+    
+    
+  <!-content end--->
+  
+{/block}

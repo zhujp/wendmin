@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="./layui/css/layui.css"  media="all">
+</head>
+<body>
+              
+<div class="layui-layout layui-layout-admin layui-login" style="text-align: center;">
+<blockquote class="layui-elem-quote layui-quote-nm" style="width:30%;margin-top:180px;margin-left:34%;">
+<fieldset class="layui-elem-field layui-field-title">
+  <legend>Wendiy</legend>
+  </fieldset>
+  <form class="layui-form" action="">
+  <div class="layui-form-item" style="margin-left:100px;">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-inline">
+      <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="margin-left:100px;">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-inline">
+      <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item" style="margin-left:100px;">
+    <div class="layui-input-inline">
+      <button class="layui-btn" lay-submit="" lay-filter="sub" style="width:190px;margin-left: 110px;">登录</button>
+    </div>
+  </div>
+  </form>
+  </blockquote>
+   
+
+</div>
+{block name="footer"}
+<div class="layui-footer footer footer-doc">
+  <div class="layui-main">
+    <p>2016 © <a href="/">wendiy.com</a></p>
+    
+  </div>
+</div>
+<style type="text/css">
+  .footer {
+        padding: 30px 0;
+    line-height: 30px;
+    text-align: center;
+    background-color: #eee;
+    color: #666;
+    font-weight: 300;
+  }
+</style>  
+{/block}         
+<script src="./layui/layui.js" charset="utf-8"></script>
+<script>
+layui.use(['element','form'], function(){
+  var element = layui.element(); 
+  var form = layui.form();
+  //自定义验证规则
+  form.verify({
+    name: function(value){
+      if(value.length < 1){
+        return '请输入用户名';
+      }
+    }
+    ,password: function(value){
+      if(value.length < 1){
+        return '请输入密码';
+      }
+    }
+  });
+  
+  
+  
+  //监听提交
+  form.on('submit(sub)', function(data){
+    $.post(url,JSON.stringify(data.field),function(result){
+      if (result.error == 1) {
+        layer.msg();
+      }
+    });
+    return false;
+   
+  });
+  
+});
+</script>
+
+</body>
+</html>

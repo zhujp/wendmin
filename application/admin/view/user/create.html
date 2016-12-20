@@ -1,0 +1,84 @@
+{extend name="layout/base" /}
+{block name="body"}
+<!-content start--->
+      <div class="layui-tab layui-tab-brief" lay-filter="demoTitle">
+      <fieldset class="layui-elem-field w-list-btn">
+  <legend>新增用户</legend>
+  <div>
+    
+    <!-- <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small">返回列表</a> -->
+    
+  </div>
+
+      <div class="layui-tab-content site-body">
+       
+
+        <div class="layui-tab-item layui-show">
+          <form class="layui-form" action="{:url('save')}" method="post">
+            
+            <div class="layui-form-item">
+              <label class="layui-form-label">用户名</label>
+              <div class="layui-input-inline">
+                <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">手机</label>
+              <div class="layui-input-inline">
+                <input type="text" name="mobile" lay-verify="" autocomplete="off" placeholder="请输入手机" class="layui-input">
+              </div>
+            </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-inline">
+              <input type="text" name="email" lay-verify="" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">密码</label>
+              <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
+              </div>
+            </div> 
+            <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+              <input type="radio" name="sex" value="1" title="男" checked="">
+              <input type="radio" name="sex" value="2" title="女">
+              <input type="radio" name="sex" value="3" title="保密">
+            </div>
+          </div>
+          
+
+              <div class="layui-form-item">
+                <label class="layui-form-label">年龄</label>
+                <div class="layui-input-inline">
+                  <input type="number" name="age" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+
+              <div class="layui-inline">
+            <label class="layui-form-label">生日</label>
+            <div class="layui-input-block">
+              <input type="text" name="birthday" value="{:date('Y-m-d')}" id="date" lay-verify="date" placeholder="2016-12-21" autocomplete="off" class="layui-input" onclick="layui.laydate({elem: this})">
+            </div>
+          </div>
+
+            <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+              <div class="layui-input-inline">
+                
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">保存</button>
+              </div>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      </fieldset>
+
+    </div> 
+  <!-content end--->
+
+    {/block}
