@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'       => '127.0.0.1',
     // 数据库名
-    'database'       => 'www_wendiy_com',
+    'database'       => 'wendmin',
     // 用户名
     'username'       => 'root',
     // 密码
-    'password'       => '34130707',
+    'password'       => '123456',
     // 端口
     'hostport'       => '3306',
     // 连接dsn
